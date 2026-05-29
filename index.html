@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中四 M2 溫習網站</title>
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Microsoft JhengHei';
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        /* 分頁按鈕樣式 */
+        .tab {
+            overflow: hidden;
+            border-bottom: 2px solid #ecf0f1;
+            margin-bottom: 20px;
+        }
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 20px;
+            transition: 0.3s;
+            font-size: 16px;
+            font-weight: bold;
+            color: #7f8c8d;
+            border-radius: 8px 8px 0 0;
+        }
+        .tab button:hover {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+        }
+        .tab button.active {
+            background-color: #3498db;
+            color: white;
+        }
+        /* 分頁內容樣式 */
+        .tabcontent {
+            display: none;
+            padding: 10px 20px;
+            animation: fadeEffect 0.5s;
+        }
+        @keyframes fadeEffect {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        h2 {
+            color: #2980b9;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #2c3e50;
+            margin-top: 25px;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+        }
+        .example-box {
+            background-color: #e8f4f8;
+            border-left: 5px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .formula-box {
+            background-color: #fcf3cf;
+            border: 1px solid #f1c40f;
+            padding: 15px;
+            font-size: 1.05em;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .dse-tip {
+            background-color: #fdebd0;
+            border: 1px solid #e67e22;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: #d35400;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>中四 M2 數學延伸單元 (二) 溫習平台</h1>
+        <p>掌握代數與微積分的基礎</p>
+    </header>
+
+    <div class="container">
+        <div class="tab">
+            <button class="tablinks" onclick="openTopic(event, 'Topic0')">課題 0: 根式化簡</button>
+            <button class="tablinks" onclick="openTopic(event, 'Topic1')" id="defaultOpen">課題 1: 數學歸納法</button>
+            <button class="tablinks" onclick="openTopic(event, 'Topic2')">課題 2: 二項式</button>
+            <button class="tablinks" onclick="openTopic(event, 'Topic3')">課題 3: 三角學</button>
+            <button class="tablinks" onclick="openTopic(event, 'Topic4')">課題 4: 極限</button>
+            <button class="tablinks" onclick="openTopic(event, 'Topic5')">課題 5: 求導法</button>
+        </div>
+
+        <div id="Topic0" class="tabcontent">
+            <h2>課題 0: 根式化簡 (分母有理化及共軛)</h2>
+            <p>在 M2 的代數運算及日後學習微積分（如求極限 Limit）時，我們經常需要將算式化簡。其中一個重要的技巧是<strong>分母有理化 (Rationalization of Denominator)</strong>。</p>
+
+            <h3>1. 甚麼是分母有理化？</h3>
+            <p>當一個分數的分母含有根式（無理數），我們會透過擴分（分子分母同乘一個數）來消除分母的根號，使其變成有理數。</p>
+            <div class="formula-box">
+                <strong>基本原理：</strong>利用 $ \sqrt{a} \times \sqrt{a} = a $ （假設 $a > 0$）
+            </div>
+            
+            <div class="example-box">
+                <strong>基本例子：</strong><br>
+                將 $\frac{1}{\sqrt{x}}$ 進行分母有理化：
+                $$ \frac{1}{\sqrt{x}} = \frac{1 \cdot \sqrt{x}}{\sqrt{x} \cdot \sqrt{x}} = \frac{\sqrt{x}}{x} $$
+            </div>
+
+            <h3>2. 共軛根式 (Conjugate Surds)</h3>
+            <p>當分母包含加減號（例如 $\sqrt{a} + \sqrt{b}$），我們單純乘上一個根號是無法消除所有根號的。這時我們需要利用<strong>平方差恆等式 (Difference of Two Squares)</strong>：</p>
+            <div class="formula-box">
+                $$ (x + y)(x - y) = x^2 - y^2 $$
+            </div>
+            <p>如果分母是 $\sqrt{a} + \sqrt{b}$，它的<strong>共軛 (Conjugate)</strong> 就是 $\sqrt{a} - \sqrt{b}$。分子分母同時乘以共軛，就能利用平方差消除根號。</p>
+            <p>如果分母是 $\sqrt{a} - \sqrt{b}$，它的<strong>共軛</strong> 就是 $\sqrt{a} + \sqrt{b}$。</p>
+
+            <h3>3. 實戰範例</h3>
+            <div class="example-box">
+                <strong>例題：</strong>化簡以下算式，並將分母有理化。<br>
+                $$ \frac{3}{\sqrt{5} - \sqrt{2}} $$
+                <hr style="border: 0; border-top: 1px dashed #3498db; margin: 10px 0;">
+                <strong>解答：</strong><br>
+                分母為 $\sqrt{5} - \sqrt{2}$，因此分子分母同乘其共軛 $\sqrt{5} + \sqrt{2}$：
+                $$ \frac{3}{\sqrt{5} - \sqrt{2}} \times \frac{\sqrt{5} + \sqrt{2}}{\sqrt{5} + \sqrt{2}} $$
+                $$ = \frac{3(\sqrt{5} + \sqrt{2})}{(\sqrt{5})^2 - (\sqrt{2})^2} $$
+                $$ = \frac{3(\sqrt{5} + \sqrt{2})}{5 - 2} $$
+                $$ = \frac{3(\sqrt{5} + \sqrt{2})}{3} $$
+                $$ = \sqrt{5} + \sqrt{2} $$
+            </div>
+        </div>
+
+        <div id="Topic1" class="tabcontent">
+            <h2>課題 1: 數學歸納法 (Mathematical Induction)</h2>
+            <p>數學歸納法是 M2 課程中必考的<strong>證明方法</strong>。在 HKDSE 中，文字描述的準確度極高，漏寫關鍵字會直接失去步驟分。</p>
+
+            <h3>1. 求和符號 (Sigma $\sum$) 的用法及例子</h3>
+            <p>當我們需要把一連串有規律的數字加起來時，我們會使用希臘字母 $\sum$（讀作 Sigma）來代表「求和」。</p>
+            
+            <div class="formula-box">
+                <strong>標準結構：</strong>
+                $$ \sum_{r=1}^{n} T_r = T_1 + T_2 + T_3 + \dots + T_n $$
+                <ul>
+                    <li>$r$ 是<strong>指標 (Index)</strong>，會由下方的下限逐次加 $1$ 增加到上方的上限 $n$。</li>
+                    <li>$T_r$ 是數列的<strong>通項 (General Term)</strong>。</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <strong>例子 A（展開算式）：</strong><br>
+                $$ \sum_{r=1}^{4} r^2 = 1^2 + 2^2 + 3^2 + 4^2 = 1 + 4 + 9 + 16 = 30 $$
+            </div>
+
+            <h3>2. 常見求和公式 (Summation Formulae)</h3>
+            <div class="formula-box">
+                <strong>1. 連續正整數求和：</strong> $$ \sum_{r=1}^{n} r = \frac{n(n + 1)}{2} $$<br>
+                <strong>2. 平方和公式：</strong> $$ \sum_{r=1}^{n} r^2 = \frac{n(n + 1)(2n + 1)}{6} $$<br>
+                <strong>3. 立方和公式：</strong> $$ \sum_{r=1}^{n} r^3 = \left[ \frac{n(n + 1)}{2} \right]^2 $$
+            </div>
+
+            <h3>3. 數學歸納法原理 (HKDSE 標準寫法)</h3>
+            <div class="dse-tip">
+                <strong>💡 DSE 摘星提示：</strong><br>
+                考評局極度看重「某正整數 (some positive integer)」及結論的完整性。請務必死記以下紅字/粗體部分的標準寫法！
+            </div>
+            
+            <div class="formula-box" style="text-align: left;">
+                <p>設 $P(n)$ 為命題「 $\sum_{r=1}^{n} r = \frac{n(n+1)}{2}$ 」。</p>
+                
+                <strong>步驟一：驗證基本情況 (Base Case)</strong><br>
+                當 $n=1$ 時，<br>
+                左方 (L.H.S.) $= 1$<br>
+                右方 (R.H.S.) $= \frac{1(1+1)}{2} = 1$<br>
+                $\because$ L.H.S. $=$ R.H.S.<br>
+                $\therefore P(1)$ 成立。
+                <br><br>
+
+                <strong>步驟二：作出歸納假設 (Inductive Hypothesis) [★ 關鍵 1M 分]</strong><br>
+                假設 $P(k)$ 對<strong>某正整數 $k$</strong> 成立。 <em>(Assume $P(k)$ is true for <strong>some positive integer $k$</strong>.)</em><br>
+                即 $\sum_{r=1}^{k} r = \frac{k(k+1)}{2}$。
+                <br><br>
+
+                <strong>步驟三：證明下一個情況 (Inductive Step)</strong><br>
+                當 $n=k+1$ 時，<br>
+                $\text{L.H.S.} = \sum_{r=1}^{k+1} r$<br>
+                $= \left( \sum_{r=1}^{k} r \right) + (k+1)$<br>
+                $= \frac{k(k+1)}{2} + (k+1)$ &nbsp;&nbsp;<em>(利用歸納假設 By Inductive Hypothesis)</em><br>
+                $= (k+1) \left[ \frac{k}{2} + 1 \right]$<br>
+                $= \frac{(k+1)(k+2)}{2}$<br>
+                $= \text{R.H.S.}$<br>
+                $\therefore P(k+1)$ 亦成立。
+                <br><br>
+
+                <strong>步驟四：寫下總結 (Conclusion) [★ 必須有 Step 2, 3 才給此分]</strong><br>
+                <strong>藉數學歸納法原理，$P(n)$ 對所有正整數 $n$ 均成立。</strong><br>
+                <em>(By the Principle of Mathematical Induction, $P(n)$ is true for all positive integers $n$.)</em>
+            </div>
+        </div>
+
+        <div id="Topic2" class="tabcontent">
+            <h2>課題 2: 二項式定理 (Binomial Theorem)</h2>
+            <p>二項式定理是 M2 的核心課題之一，主要用於快速展開形如 $(a + b)^n$ 的算式，而不需要慢慢逐層相乘。在考試中，這課往往與尋找特定項（例如 $x^3$ 的係數）或推算未知數 $n$ 有關。</p>
+
+            <h3>1. 組合數 $nC_r$ 的公式及應用</h3>
+            <p>在展開二項式之前，必須先掌握組合數 $C_r^n$ （亦可寫作 $\binom{n}{r}$ 或 $nC_r$）。它代表從 $n$ 件物件中抽出 $r$ 件的組合方法數量。</p>
+            
+            <div class="formula-box">
+                <strong>一般公式：</strong>
+                $$ C_r^n = \binom{n}{r} = \frac{n!}{r!(n - r)!} $$
+                <small>*註：$n! = n \times (n-1) \times (n-2) \times \dots \times 1$</small>
+            </div>
+
+            <div class="dse-tip">
+                <strong>💡 DSE 摘星必背：化簡 $nC_1, nC_2, nC_3$</strong><br>
+                在 M2 考試中，$n$ 經常是未知數，我們無法依賴計算機，必須熟記以下化簡結果來列方程：
+                <ul>
+                    <li>$C_1^n = n$</li>
+                    <li>$C_2^n = \frac{n(n - 1)}{2}$</li>
+                    <li>$C_3^n = \frac{n(n - 1)(n - 2)}{6}$</li>
+                </ul>
+            </div>
+
+            <h3>2. 二項式定理與巴斯卡三角形</h3>
+            <p><strong>巴斯卡三角形 (Pascal's Triangle)</strong> 提供了一個直觀的方法來找展開式的係數。三角形兩側皆為 1，中間的每個數字都是它上方兩個數字的總和。</p>
+            
+            <div class="example-box" style="text-align: center; font-family: monospace;">
+                <strong>當 $n=0$:</strong> 1 <br>
+                <strong>當 $n=1$:</strong> 1 &nbsp; 1 <br>
+                <strong>當 $n=2$:</strong> 1 &nbsp; 2 &nbsp; 1 <br>
+                <strong>當 $n=3$:</strong> 1 &nbsp; 3 &nbsp; 3 &nbsp; 1 <br>
+                <strong>當 $n=4$:</strong> 1 &nbsp; 4 &nbsp; 6 &nbsp; 4 &nbsp; 1 <br>
+            </div>
+
+            <p>雖然巴斯卡三角形很方便，但如果 $n$ 很大（例如 $n=10$），畫三角形會非常耗時。這時我們就需要完整的<strong>二項式定理公式</strong>：</p>
+
+            <div class="formula-box">
+                <strong>二項式定理 (Binomial Theorem)：</strong>
+                $$ (a + b)^n = C_0^n a^n + C_1^n a^{n-1}b + C_2^n a^{n-2}b^2 + \dots + C_n^n b^n $$
+                <br>
+                <strong>通項 (General Term)：</strong>
+                $$ T_{r+1} = C_r^n a^{n-r} b^r $$
+                <small>*注意：第 $r+1$ 項的組合數是 $C_r^n$，而不是 $C_{r+1}^n$。</small>
+            </div>
+
+            <h3>3. 常見題型例子</h3>
+            <p>DSE 最常考的題型是要求你尋找展開式中某個特定次方的「係數 (Coefficient)」。</p>
+
+            <div class="example-box">
+                <strong>例題：</strong><br>
+                求 $(2 - 3x)^5$ 展開式中，$x^2$ 的係數。
+                <hr style="border: 0; border-top: 1px dashed #3498db; margin: 10px 0;">
+                <strong>解答：</strong><br>
+                利用通項公式 $T_{r+1} = C_r^n a^{n-r} b^r$，這裡 $n=5, a=2, b=(-3x)$。<br>
+                $$ T_{r+1} = C_r^5 (2)^{5-r} (-3x)^r $$
+                $$ = C_r^5 (2)^{5-r} (-3)^r \cdot x^r $$
+                
+                因為我們要求 $x^2$ 的係數，所以令 $r = 2$。<br>
+                代入 $r = 2$：
+                $$ T_{2+1} = C_2^5 (2)^{5-2} (-3)^2 \cdot x^2 $$
+                $$ = 10 \cdot (2)^3 \cdot 9 \cdot x^2 $$
+                $$ = 10 \cdot 8 \cdot 9 \cdot x^2 $$
+                $$ = 720 x^2 $$
+                
+                $\therefore x^2$ 的係數為 $720$。
+            </div>
+            
+            <div class="example-box">
+                <strong>例題 (進階未知數題型)：</strong><br>
+                已知 $(1 + kx)^n$ 的首三項展開式為 $1 - 12x + 60x^2 - \dots$，求常數 $k$ 及正整數 $n$ 的值。
+                <hr style="border: 0; border-top: 1px dashed #3498db; margin: 10px 0;">
+                <strong>解答思路：</strong><br>
+                首先展開 $(1 + kx)^n$ 至 $x^2$ 項：
+                $$ (1 + kx)^n = 1 + C_1^n(1)^{n-1}(kx) + C_2^n(1)^{n-2}(kx)^2 + \dots $$
+                $$ = 1 + n(kx) + \frac{n(n-1)}{2}(k^2x^2) + \dots $$
+                $$ = 1 + (nk)x + \frac{n(n-1)k^2}{2}x^2 + \dots $$
+                
+                比較係數 (Comparing coefficients)：<br>
+                對於 $x$ 項： $nk = -12$ &nbsp; --- (1)<br>
+                對於 $x^2$ 項： $\frac{n(n-1)k^2}{2} = 60$ &nbsp; --- (2)<br>
+                
+                透過聯立方程，將 (1) 中的 $k = \frac{-12}{n}$ 代入 (2)，即可解出 $n = 6$ 及 $k = -2$。
+            </div>
+        </div>
+
+        <div id="Topic3" class="tabcontent">
+            <h2>課題 3: 三角學 (Trigonometry)</h2>
+            <p>三角學是 M2 微積分（Calculus）的重要基石。M2 的三角學不僅要求熟練恆等式變形，還會將範疇擴展至弧度制及無限旋轉的角度。</p>
+
+            <h3>1. 弧度 (Radian) 與角度 (Degree)</h3>
+            <p>在 DSE 必修部分，我們習慣使用「角度 ($^\circ$)」；但在 M2 中，大部分題目都會使用<strong>弧度 (rad)</strong>。當三角函數內沒有角度符號（如 $\sin 2$ 而非 $\sin 2^\circ$），即代表該數是以弧度表示。</p>
+            
+            <div class="formula-box">
+                <strong>核心轉換關係：</strong>
+                $$ 180^\circ = \pi \text{ rad} $$
+                <ul>
+                    <li><strong>角度轉弧度：</strong> $\theta \times \frac{\pi}{180^\circ}$</li>
+                    <li><strong>弧度轉角度：</strong> $x \times \frac{180^\circ}{\pi}$</li>
+                </ul>
+                <strong>弧度制下的幾何公式（$\theta$ 必須為弧度）：</strong><br>
+                弧長 (Arc length) $s = r\theta$ &nbsp;&nbsp;|&nbsp;&nbsp; 扇形面積 (Area of sector) $A = \frac{1}{2}r^2\theta$
+            </div>
+
+            <h3>2. 倒數三角函數與三角恒等式</h3>
+            <p>除了必修部分的 $\sin, \cos, \tan$ 外，M2 必須極度熟練運用它們的倒數函數：正割 ($\sec$)、餘割 ($\csc$ 或 $\text{cosec}$) 及 餘切 ($\cot$)。</p>
+            
+            <div class="formula-box">
+                <strong>倒數定義：</strong>
+                $$ \sec\theta = \frac{1}{\cos\theta} \quad\left|\quad \csc\theta = \frac{1}{\sin\theta} \quad\right|\quad \cot\theta = \frac{1}{\tan\theta} = \frac{\cos\theta}{\sin\theta} $$
+                <hr style="border: 0; border-top: 1px dashed #f1c40f; margin: 10px 0;">
+                <strong>平方恆等式 (Pythagorean Identities)：</strong>
+                $$ \sin^2\theta + \cos^2\theta = 1 $$
+                $$ 1 + \tan^2\theta = \sec^2\theta \quad (\text{將上式全除以 } \cos^2\theta \text{ 得出}) $$
+                $$ 1 + \cot^2\theta = \csc^2\theta \quad (\text{將上式全除以 } \sin^2\theta \text{ 得出}) $$
+            </div>
+
+            <div class="dse-tip">
+                <strong>⚠️ M2 核心概念：定義域無限延伸</strong><br>
+                DSE 必修部分通常只討論 $0 \le \theta \le 360^\circ$（即 $0 \le \theta \le 2\pi$）。<br>
+                <strong>但在 M2 中，$\theta$ 可以是大於 $2\pi$ 或小於 $0$ 的任意實數！</strong>
+                <ul>
+                    <li><strong>逆時針旋轉</strong>為正角（例如：$\frac{5\pi}{2}$ 與 $\frac{\pi}{2}$ 位置相同）。</li>
+                    <li><strong>順時針旋轉</strong>為負角（例如：$-\frac{\pi}{4}$ 位於第四象限，$\cos(-\theta) = \cos\theta$, $\sin(-\theta) = -\sin\theta$）。</li>
+                    <li>運用 <strong>CAST 象限法則</strong>時，請將邊界記為 $0, \frac{\pi}{2}, \pi, \frac{3\pi}{2}, 2\pi$。</li>
+                </ul>
+            </div>
+
+            <h3>3. 關聯角公式 (Related Angle Formulae) 與 CAST 法則</h3>
+            <p>在 $0$ 至 $2\pi$ 之間，我們經常需要將位於第二、三、四象限的角度轉換為第一象限的銳角 $\theta$。溫習時可以記住口訣：<strong>「奇變偶不變，符號看象限」</strong>。</p>
+            
+            <div class="formula-box" style="text-align: left;">
+                <strong>情況一：使用 $\pi$ 或 $2\pi$ （即 $180^\circ$ / $360^\circ$）—— 函數名稱不變</strong><br>
+                符號正負取決於原本的函數在該象限是正還是負：
+                <ul>
+                    <li><strong>第二象限 (S)：</strong> $\sin(\pi - \theta) = \sin\theta \quad|\quad \cos(\pi - \theta) = -\cos\theta \quad|\quad \tan(\pi - \theta) = -\tan\theta$</li>
+                    <li><strong>第三象限 (T)：</strong> $\sin(\pi + \theta) = -\sin\theta \quad|\quad \cos(\pi + \theta) = -\cos\theta \quad|\quad \tan(\pi + \theta) = \tan\theta$</li>
+                    <li><strong>第四象限 (C)：</strong> $\sin(2\pi - \theta) = -\sin\theta \quad|\quad \cos(2\pi - \theta) = \cos\theta \quad|\quad \tan(2\pi - \theta) = -\tan\theta$</li>
+                </ul>
+                <hr style="border: 0; border-top: 1px dashed #f1c40f; margin: 10px 0;">
+                
+                <strong>情況二：使用 $\frac{\pi}{2}$ 或 $\frac{3\pi}{2}$ （即 $90^\circ$ / $270^\circ$）—— 函數必須改變 (Co-functions)</strong><br>
+                轉換規則： $\sin \leftrightarrow \cos$ &nbsp;|&nbsp; $\tan \leftrightarrow \cot$ &nbsp;|&nbsp; $\sec \leftrightarrow \csc$<br>
+                <ul>
+                    <li><strong>第一象限 (A)：</strong> $\sin\left(\frac{\pi}{2} - \theta\right) = \cos\theta \quad|\quad \cos\left(\frac{\pi}{2} - \theta\right) = \sin\theta$</li>
+                    <li><strong>第二象限 (S)：</strong> $\sin\left(\frac{\pi}{2} + \theta\right) = \cos\theta \quad|\quad \cos\left(\frac{\pi}{2} + \theta\right) = -\sin\theta$</li>
+                </ul>
+                <small>*註：$\cos\left(\frac{\pi}{2} + \theta\right)$ 出現負號，是因為「原本的函數」$\cos$ 在第二象限是負數。</small>
+            </div>
+
+            <h3>4. 複角公式 (Compound Angle Formulae)</h3>
+            <p>當拆解兩個角度相加減的三角函數時，必須使用複角公式：</p>
+            <div class="formula-box">
+                $$ \sin(A \pm B) = \sin A \cos B \pm \cos A \sin B $$
+                $$ \cos(A \pm B) = \cos A \cos B \mp \sin A \sin B \quad (\text{注意：正負號相反}) $$
+                $$ \tan(A \pm B) = \frac{\tan A \pm \tan B}{1 \mp \tan A \tan B} $$
+            </div>
+
+            <h3>5. 二倍角公式與半角公式</h3>
+            <div class="dse-tip" style="background-color: #f2d7d5; border-color: #c0392b; color: #922b21;">
+                <strong>🚨 考試極重要警告：</strong><br>
+                <strong>二倍角公式和半角公式在 DSE M2 考核時是不會提供在公式表（Formula Sheet）上的！</strong>同學必須倒背如流。
+            </div>
+
+            <div class="formula-box">
+                <strong>二倍角公式 (Double Angle Formulae)：</strong>
+                $$ \sin 2\theta = 2\sin\theta\cos\theta $$
+                $$ \cos 2\theta = \cos^2\theta - \sin^2\theta = 2\cos^2\theta - 1 = 1 - 2\sin^2\theta $$
+                $$ \tan 2\theta = \frac{2\tan\theta}{1 - \tan^2\theta} $$
+                <br>
+                <strong>半角公式（由 $\cos 2\theta$ 變形而得，常用於微積分降次）：</strong>
+                $$ \sin^2\theta = \frac{1 - \cos 2\theta}{2} \quad\left|\quad \cos^2\theta = \frac{1 + \cos 2\theta}{2}\right. $$
+            </div>
+
+            <h3>6. 積化和差 (Product to Sum Formulae)</h3>
+            <p>將兩個三角函數相乘的式子，轉化為相加或相減的形式（公式表會提供，但要懂得雙向運用）：</p>
+            <div class="formula-box">
+                $$ \sin A \cos B = \frac{1}{2} [\sin(A + B) + \sin(A - B)] $$
+                $$ \cos A \sin B = \frac{1}{2} [\sin(A + B) - \sin(A - B)] $$
+                $$ \cos A \cos B = \frac{1}{2} [\cos(A + B) + \cos(A - B)] $$
+                $$ \sin A \sin B = -\frac{1}{2} [\cos(A + B) - \cos(A - B)] $$
+            </div>
+
+            <h3>7. 和差化積 (Sum to Product Formulae)</h3>
+            <p>將兩個三角函數相加或相減的式子，轉化為相乘的形式，常温習於化簡三角方程（公式表會提供）：</p>
+            <div class="formula-box">
+                $$ \sin X + \sin Y = 2 \sin\left(\frac{X + Y}{2}\right) \cos\left(\frac{X - Y}{2}\right) $$
+                $$ \sin X - \sin Y = 2 \cos\left(\frac{X + Y}{2}\right) \sin\left(\frac{X - Y}{2}\right) $$
+                $$ \cos X + \cos Y = 2 \cos\left(\frac{X + Y}{2}\right) \cos\left(\frac{X - Y}{2}\right) $$
+                $$ \cos X - \cos Y = -2 \sin\left(\frac{X + Y}{2}\right) \sin\left(\frac{X - Y}{2}\right) $$
+            </div>
+
+            <div class="example-box">
+                <strong>實戰小解題示範（證明題）：</strong><br>
+                證明 $\frac{\sin 3\theta + \sin \theta}{\cos 3\theta + \cos \theta} = \tan 2\theta$。
+                <hr style="border: 0; border-top: 1px dashed #3498db; margin: 10px 0;">
+                <strong>證明：</strong><br>
+                左方 (L.H.S.)，分子使用 $\sin X + \sin Y$，分母使用 $\cos X + \cos Y$ 的和差化積公式：
+                $$ \text{L.H.S.} = \frac{2 \sin\left(\frac{3\theta + \theta}{2}\right) \cos\left(\frac{3\theta - \theta}{2}\right)}{2 \cos\left(\frac{3\theta + \theta}{2}\right) \cos\left(\frac{3\theta - \theta}{2}\right)} $$
+                $$ = \frac{2 \sin(2\theta) \cos(\theta)}{2 \cos(2\theta) \cos(\theta)} $$
+                
+                約去分子分母相同的 $2$ 及 $\cos\theta$：
+                $$ = \frac{\sin 2\theta}{\cos 2\theta} $$
+                $$ = \tan 2\theta = \text{R.H.S.} $$
+                $\therefore$ 命題得證。
+            </div>
+        </div>
+
+        <div id="Topic4" class="tabcontent">
+            <h2>課題 4: 極限 (Limits)</h2>
+            <p>極限是微積分（Calculus）的開端。它研究當自變量 $x$ 無限接近某個值時，函數值 $f(x)$ 會趨向甚麼地方。掌握極限的求法是日後學習「第一原理導數」的必備條件。</p>
+
+            <h3>1. 可直接代入數字的極限 (Direct Substitution)</h3>
+            <p>如果函數在該點是連續且有定義的（分母不為零，根號內不為負），我們可以直接把 $x$ 的趨向值代入算式中。</p>
+            <div class="example-box">
+                <strong>例子：</strong><br>
+                求 $\lim_{x \to 2} (3x^2 - 5x + 1)$。
+                <hr style="border: 0; border-top: 1px dashed #3498db; margin: 10px 0;">
+                <strong>解答：</strong>直接代入 $x = 2$：
+                $$ \lim_{x \to 2} (3x^2 - 5x + 1) = 3(2)^2 - 5(2) + 1 = 12 - 10 + 1 = 3 $$
+            </div>
+
+            <h3>2. 不定式：需要因式分解或乘共軛的極限 (Indeterminate Forms: $\frac{0}{0}$)</h3>
+            <p>當直接代入時出現 $\frac{0}{0}$ 的情況，代表分子分母有共同的「零因子」，我們必須先消除它。</p>
+            
+            <div class="example-box">
+                <strong>題型 A（因式分解 Factorization）：</strong><br>
+                求 $\lim_{x \to 3} \frac{x^2 - 9}{x - 3}$。
+                <hr style="border: 0; border-top: 1px dashed #3498db; margin: 10px 0;">
+                <strong>解答：</strong>直接代入會得到 $\frac{0}{0}$。先將分子因式分解：
+                $$ \lim_{x \to 3} \frac{(x - 3)(x + 3)}{x - 3} $$
+                約去零因子 $(x - 3)$，然後再代入 $x = 3$：
+                $$ = \lim_{x \to 3} (x + 3) = 3 + 3 = 6 $$
+            </div>
+
+            <div class="example-box">
+                <strong>題型 B（乘共軛根式 Rationalization）：</strong><br>
+                求 $\lim_{x \to 0} \frac{\sqrt{x + 1} - 1}{x}$。
+                <hr style="border: 0; border-top: 1px dashed #3498db; margin: 10px 0;">
+                <strong>解答：</strong>分子分母同乘分子的共軛根式 $\sqrt{x + 1} + 1$：
+                $$ \lim_{x \to 0} \frac{(\sqrt{x + 1} - 1)(\sqrt{x + 1} + 1)}{x(\sqrt{x + 1} + 1)} $$
+                $$ = \lim_{x \to 0} \frac{(x + 1) - 1}{x(\sqrt{x + 1} + 1)} = \lim_{x \to 0} \frac{x}{x(\sqrt{x + 1} + 1)} $$
+                約去 $x$ 後代入 $x = 0$：
+                $$ = \lim_{x \to 0} \frac{1}{\sqrt{x + 1} + 1} = \frac{1}{\sqrt{0 + 1} + 1} = \frac{1}{2} $$
+            </div>
+
+            <h3>3. 三角函數核心極限： $\frac{\sin x}{x}$</h3>
+            <p>當角度 $x$ 以<strong>弧度 (Radian)</strong> 表示時，以下定理永遠成立：</p>
+            <div class="formula-box">
+                $$ \lim_{x \to 0} \frac{\sin x}{x} = 1 \quad \text{或} \quad \lim_{x \to 0} \frac{x}{\sin x} = 1 $$
+                <small>*注意：此處的 $\sin$ 內部的結構必須與分母完全相同。例如 $\lim_{x \to 0} \frac{\sin 3x}{3x} = 1$。</small>
+            </div>
+            <div class="example-box">
+                <strong>延伸題型：</strong>求 $\lim_{x \to 0} \frac{\sin 5x}{2x}$。<br>
+                <strong>解答：</strong>配湊分母使其與分子角度一致：
+                $$ \lim_{x \to 0} \frac{\sin 5x}{2x} = \lim_{x \to 0} \left( \frac{\sin 5x}{5x} \times \frac{5x}{2x} \right) = \left( \lim_{x \to 0} \frac{\sin 5x}{5x} \right) \times \frac{5}{2} = 1 \times \frac{5}{2} = \frac{5}{2} $$
+            </div>
+
+            <h3>4. 趨向無限的極限 (Limits at Infinity: $x \to \infty$)</h3>
+            <p>當 $x$ 趨向無限大時，求分式極限的核心技巧是：<strong>分子與分母同時除以分母的最高次項</strong>。利用原理：當 $p > 0$ 時，$\lim_{x \to \infty} \frac{1}{x^p} = 0$。</p>
+            <div class="formula-box">
+                <strong>速算口訣：</strong>
+                <ul>
+                    <li>如果 <strong>分子最高次數 < 分母最高次數</strong>，極限值 $= 0$。</li>
+                    <li>如果 <strong>分子最高次數 = 分母最高次數</strong>，極限值 $= \frac{\text{分子最高次項係數}}{\text{分母最高次項係數}}$。</li>
+                    <li>如果 <strong>分子最高次數 > 分母最高次數</strong>，極限不存在 ($\pm\infty$)。</li>
+                </ul>
+            </div>
+            <div class="example-box">
+                <strong>例子：</strong>求 $\lim_{x \to \infty} \frac{4x^2 - 3x + 2}{5x^2 + 1}$。<br>
+                <strong>解答：</strong>分母最高次項是 $x^2$，分子分母同除以 $x^2$：
+                $$ \lim_{x \to \infty} \frac{\frac{4x^2}{x^2} - \frac{3x}{x^2} + \frac{2}{x^2}}{\frac{5x^2}{x^2} + \frac{1}{x^2}} = \lim_{x \to \infty} \frac{4 - \frac{3}{x} + \frac{2}{x^2}}{5 + \frac{1}{x^2}} = \frac{4 - 0 + 0}{5 + 0} = \frac{4}{5} $$
+            </div>
+
+            <h3>5. 補充知識：自然常數 $e$、自然對數 $\ln$ 及 Log 轉換</h3>
+            <p>在學習接下來的指數與對數極限前，必須先熟練 M2 必備的 $e$ 與 $\ln$ 基本運算：</p>
+            <div class="formula-box">
+                <strong>定義與互逆性質：</strong> $e \approx 2.71828$ ； $\ln x \equiv \log_e x$<br>
+                $$ e^{\ln x} = x \quad (x > 0) \quad\left|\quad \ln(e^x) = x \quad\right|\quad \ln 1 = 0 \quad\left|\quad \ln e = 1 \right. $$
+                <hr style="border: 0; border-top: 1px dashed #f1c40f; margin: 10px 0;">
+                <strong>轉底公式 (Change of Base) —— 考微分前必須先轉為 $\ln$：</strong>
+                $$ \log_a x = \frac{\ln x}{\ln a} $$
+                <hr style="border: 0; border-top: 1px dashed #f1c40f; margin: 10px 0;">
+                <strong>對數運算法則：</strong>
+                $$ \ln(xy) = \ln x + \ln y \quad\left|\quad \ln\left(\frac{x}{y}\right) = \ln x - \ln y \quad\right|\quad \ln(x^k) = k \ln x $$
+            </div>
+
+            <h3>6. 自然常數 $e$ 的定義極限：$(1 + 0)^\infty$ 形式</h3>
+            <p>自然對數的底數 $e$（約等於 2.71828）可以用以下兩個互為倒數結構的極限來定義：</p>
+            <div class="formula-box">
+                $$ \lim_{x \to 0} (1 + x)^{\frac{1}{x}} = e \quad \text{及} \quad \lim_{x \to \infty} \left(1 + \frac{1}{x}\right)^x = e $$
+                <small>*特徵：括號內趨向 $1$，指數趨向 $\infty$。兩個 $x$ 的位置必須互為倒數。</small>
+            </div>
+
+            <h3>7. 指數函數核心極限： $\frac{e^x - 1}{x}$</h3>
+            <p>在證明 $e^x$ 的導數時會用到以下重要極限：</p>
+            <div class="formula-box">
+                $$ \lim_{x \to 0} \frac{e^x - 1}{x} = 1 $$
+            </div>
+
+            <h3>8. 複合函數的極限性質 (Limit of Composite Functions)</h3>
+            <p>如果函數 $f$ 在 $L$ 點是<strong>連續的 (Continuous)</strong>，且 $\lim_{x \to c} g(x) = L$，那麼我們可以把極限符號「移進」函數裡面：</p>
+            <div class="formula-box">
+                $$ \lim_{x \to c} f(g(x)) = f\left( \lim_{x \to c} g(x) \right) $$
+            </div>
+            <div class="example-box">
+                <strong>例子：</strong>求 $\lim_{x \to 0} \ln\left(\frac{\sin x}{x}\right)$。<br>
+                <strong>解答：</strong>因為對數函數 $\ln$ 在其定義域內連續，我們可以將極限移入：
+                $$ \lim_{x \to 0} \ln\left(\frac{\sin x}{x}\right) = \ln\left( \lim_{x \to 0} \frac{\sin x}{x} \right) = \ln(1) = 0 $$
+            </div>
+        </div>
+
+        <div id="Topic5" class="tabcontent">
+            <h2>課題 5: 求導法 (Differentiation)</h2>
+            <p>求導法是微積分的核心操作，主要用來尋找函數的「瞬間變化率」或圖像在某一點的「切線斜率」。M2 要求同學必須極度熟練各種函數的求導法則。</p>
+
+            <h3>1. 第一原理 (First Principles)</h3>
+            <p>第一原理是求導法的根本定義，利用極限來找出切線斜率。在考試中，如果題目明文規定「從基本原理求導 (differentiate from first principles)」，你<strong>必須</strong>使用這條公式，否則不給分。</p>
+            <div class="formula-box">
+                $$ f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} $$
+                <small>*提示：展開分子後，必須能抽出 $h$ 與分母約簡，從而消除 $\frac{0}{0}$ 的不定式。</small>
+            </div>
+
+            <h3>2. 常見函數的導數公式 (Standard Derivatives)</h3>
+            <p>在使用求導法則前，必須將以下基本函數的求導結果倒背如流：</p>
+            <div class="formula-box">
+                <strong>代數與對數/指數函數：</strong>
+                $$ \frac{d}{dx}(x^n) = nx^{n-1} \quad\left|\quad \frac{d}{dx}(e^x) = e^x \quad\right|\quad \frac{d}{dx}(\ln x) = \frac{1}{x} $$
+                <hr style="border: 0; border-top: 1px dashed #f1c40f; margin: 10px 0;">
+                <strong>三角函數（M2 必背）：</strong>
+                $$ \frac{d}{dx}(\sin x) = \cos x \quad\left|\quad \frac{d}{dx}(\cos x) = -\sin x \quad\right|\quad \frac{d}{dx}(\tan x) = \sec^2 x $$
+                $$ \frac{d}{dx}(\sec x) = \sec x \tan x \quad\left|\quad \frac{d}{dx}(\csc x) = -\csc x \cot x \quad\right|\quad \frac{d}{dx}(\cot x) = -\csc^2 x $$
+                <small>*記憶口訣：所有以 "c" 開頭的三角函數（$\cos, \csc, \cot$），其導數必然帶有<strong>負號</strong>。</small>
+            </div>
+
+            <h3>3. 求導法三大核心法則</h3>
+            <p>當函數變得複雜時，我們需要依賴三大法則來拆解。其中，<strong>鏈法則</strong>是同學最容易漏步的致命傷。</p>
+
+            <div class="example-box">
+                <strong>(A) 積法則 (Product Rule) —— 處理兩函數相乘</strong>
+                $$ \frac{d}{dx}[u(x)v(x)] = u \frac{dv}{dx} + v \frac{du}{dx} \quad (\text{口訣：前乘後微，加，後乘前微}) $$
+                <hr style="border: 0; border-top: 1px dashed #3498db; margin: 10px 0;">
+                <strong>例子：</strong> 求 $y = x^2 \sin x$ 的導數。<br>
+                $$ \frac{dy}{dx} = x^2 \cdot \frac{d}{dx}(\sin x) + \sin x \cdot \frac{d}{dx}(x^2) = x^2 \cos x + 2x \sin x $$
+            </div>
+
+            <div class="example-box">
+                <strong>(B) 商法則 (Quotient Rule) —— 處理兩函數相除</strong>
+                $$ \frac{d}{dx}\left[\frac{u(x)}{v(x)}\right] = \frac{v \frac{du}{dx} - u \frac{dv}{dx}}{v^2} \quad (\text{口訣：下乘上微，減，上乘下微，除以下平方}) $$
+                <hr style="border: 0; border-top: 1px dashed #3498db; margin: 10px 0;">
+                <strong>例子：</strong> 求 $y = \frac{e^x}{x}$ 的導數。<br>
+                $$ \frac{dy}{dx} = \frac{x \cdot \frac{d}{dx}(e^x) - e^x \cdot \frac{d}{dx}(x)}{x^2} = \frac{x e^x - e^x(1)}{x^2} = \frac{e^x(x - 1)}{x^2} $$
+            </div>
+
+            <div class="example-box">
+                <strong>(C) 鏈法則 (Chain Rule) —— 處理複合函數 (洋蔥剝皮法)</strong>
+                $$ \frac{d}{dx}[f(g(x))] = f'(g(x)) \cdot g'(x) \quad (\text{概念：微外層，內部保留，最後乘上內層的導數}) $$
+                
+                <div class="dse-tip" style="margin-top: 15px;">
+                    <strong>🔥 針對性特訓：Chain Rule 四大常見題型</strong><br>
+                    很多同學會忘記乘上 $g'(x)$，請細心觀察以下四個例子如何「剝洋蔥」：
+                    <br><br>
+                    <strong>1. 代數連鎖：</strong> $y = (3x^2 + 1)^5$<br>
+                    外層是 $()^5$，內層是 $3x^2+1$。<br>
+                    $$ \frac{dy}{dx} = \underbrace{5(3x^2 + 1)^4}_{\text{微外層}} \cdot \underbrace{(6x)}_{\text{微內層}} = 30x(3x^2 + 1)^4 $$
+                    
+                    <strong>2. 自然對數連鎖 ($\ln$)：</strong> $y = \ln(x^3 + 2x)$<br>
+                    外層是 $\ln() \to \frac{1}{()}$，內層是 $x^3+2x$。<br>
+                    $$ \frac{dy}{dx} = \frac{1}{x^3 + 2x} \cdot (3x^2 + 2) = \frac{3x^2 + 2}{x^3 + 2x} $$
+                    
+                    <strong>3. 指數連鎖 ($e$)：</strong> $y = e^{\sin x}$<br>
+                    外層是 $e^{()}$，內層是 $\sin x$。<br>
+                    $$ \frac{dy}{dx} = e^{\sin x} \cdot \cos x = \cos x \cdot e^{\sin x} $$
+                    
+                    <strong>4. 三角函數連鎖 (最易死位)：</strong> $y = \sin^3(2x)$<br>
+                    這個函數等同於 $(\sin(2x))^3$，有<strong>三層</strong>結構：$()^3 \to \sin() \to 2x$。<br>
+                    $$ \frac{dy}{dx} = \underbrace{3\sin^2(2x)}_{\text{微 } ()^3} \cdot \underbrace{\cos(2x)}_{\text{微 } \sin} \cdot \underbrace{2}_{\text{微 } 2x} = 6\sin^2(2x)\cos(2x) $$
+                </div>
+            </div>
+
+            <h3>4. 隱函數求導 (Implicit Differentiation)</h3>
+            <p>當 $x$ 和 $y$ 糾纏在一起無法分開（如 $x^2 + y^2 = 25$），兩邊同時對 $x$ 求導。<strong>注意：每當微分到帶有 $y$ 的項時，必須依據鏈法則補乘一個 $\frac{dy}{dx}$</strong>。</p>
+            <div class="example-box">
+                <strong>例子：</strong> 若 $x^2 + y^3 = 4xy$，求 $\frac{dy}{dx}$。<br>
+                <strong>解答：</strong> 兩邊對 $x$ 微分（右方 $4xy$ 需用積法則）：
+                $$ 2x + 3y^2 \frac{dy}{dx} = 4 \left( x \frac{dy}{dx} + y(1) \right) $$
+                $$ 2x + 3y^2 \frac{dy}{dx} = 4x \frac{dy}{dx} + 4y $$
+                抽出並整理 $\frac{dy}{dx}$：
+                $$ (3y^2 - 4x) \frac{dy}{dx} = 4y - 2x \implies \frac{dy}{dx} = \frac{4y - 2x}{3y^2 - 4x} $$
+            </div>
+
+            <h3>5. 對數求導法 (Logarithmic Differentiation)</h3>
+            <div class="dse-tip">
+                <strong>💡 甚麼時候使用？</strong>只在以下情況使用：<br>
+                1. 題目明文要求。<br>
+                2. 函數形式為「變數的變數次方」，例如 $x^x$。<br>
+                3. 底數為常數，指數為變數，例如 $2^x$ （可用來推導公式）。<br>
+                4. 算式極度複雜（多重乘除或根號），取 $\ln$ 能化乘除為加減。
+            </div>
+            <div class="example-box">
+                <strong>例子：</strong> 求 $y = 2^x$ 的導數。<br>
+                <strong>解答：</strong> 不能用 $nx^{n-1}$！兩邊取自然對數 $\ln$：
+                $$ \ln y = \ln(2^x) \implies \ln y = x \ln 2 $$
+                兩邊對 $x$ 隱函數求導（注意 $\ln 2$ 只是常數）：
+                $$ \frac{1}{y} \frac{dy}{dx} = \ln 2 \implies \frac{dy}{dx} = y \ln 2 \implies \frac{dy}{dx} = 2^x \ln 2 $$
+            </div>
+
+            <h3>6. 二階導數 (Second Derivative)</h3>
+            <p>二階導數就是把一階導數再微分一次，用來測試圖像的凹凸性 (Concavity) 或尋找拐點 (Point of Inflection)。</p>
+            <div class="formula-box">
+                <strong>符號：</strong> $$ y'' \quad \text{或} \quad f''(x) \quad \text{或} \quad \frac{d^2y}{dx^2} $$
+            </div>
+            <div class="example-box">
+                <strong>例子：</strong> $y = x^3 - 4x^2$。 一階：$\frac{dy}{dx} = 3x^2 - 8x$。 二階：$\frac{d^2y}{dx^2} = 6x - 8$。
+            </div>
+
+            <h3>7. 幾何應用：切線與法線斜率 (Slopes of Tangent and Normal)</h3>
+            <p>求導法最直接的用途就是尋找函數圖像在某一點的斜率。</p>
+            <div class="formula-box">
+                若曲線為 $y = f(x)$，在點 $P(a, b)$ 處：
+                <ul>
+                    <li><strong>切線斜率 (Slope of Tangent, $m_t$):</strong> 將 $x = a$ 代入導數中，即 $m_t = \left. \frac{dy}{dx} \right|_{x=a}$ 或 $f'(a)$。</li>
+                    <li><strong>法線斜率 (Slope of Normal, $m_n$):</strong> 法線與切線互相垂直，利用 $m_1 m_2 = -1$，得 $m_n = -\frac{1}{m_t}$。</li>
+                </ul>
+            </div>
+            <div class="example-box">
+                <strong>例子：</strong> 求曲線 $y = x^2 + 3x$ 在 $x = 1$ 處的切線斜率及法線斜率。<br>
+                <strong>解答：</strong> 
+                先求導數： $\frac{dy}{dx} = 2x + 3$<br>
+                代入 $x = 1$： 切線斜率 $m_t = 2(1) + 3 = 5$<br>
+                法線斜率 $m_n = -\frac{1}{5}$
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function openTopic(evt, topicName) {
+            var i, tabcontent, tablinks;
+            
+            // 隱藏所有 tabcontent
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            
+            // 移除所有按鈕的 "active" class
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            // 顯示當前點擊的分頁，並將按鈕設為 active
+            document.getElementById(topicName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // 網頁載入時預設打開課題 1 分頁 (方便檢視本次更新)
+        document.getElementById("defaultOpen").click();
+    </script>
+</body>
+</html>
